@@ -1,3 +1,5 @@
+*.DS_Store
+
 CMS.611_project_2/[Ll]ibrary/
 CMS.611_project_2/[Tt]emp/
 CMS.611_project_2/[Oo]bj/
@@ -17,7 +19,6 @@ ExportedObj/
 *.pidb
 *.booproj
 *.svd
-
 
 # Unity3D generated meta files
 *.pidb.meta
