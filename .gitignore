@@ -1,4 +1,3 @@
-*.DS_Store
 
 CMS.611_project_2/[Ll]ibrary/
 CMS.611_project_2/[Tt]emp/
@@ -25,3 +24,9 @@ ExportedObj/
 
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
+
+# Weird mac stuff
+*.DS_Store
+
+# Weird stuff about compiled files? Maybe from windows?
+*.pdb
