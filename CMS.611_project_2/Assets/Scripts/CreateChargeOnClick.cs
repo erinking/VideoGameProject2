@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CreatePosChargeOnClick : MonoBehaviour {
+public class CreateChargeOnClick : MonoBehaviour {
 
 
 	public GameObject posCharge;
@@ -12,8 +12,6 @@ public class CreatePosChargeOnClick : MonoBehaviour {
 		posCharge = GameObject.Find ("PositiveCharge");
 		negCharge = GameObject.Find ("NegativeCharge");
 	}
-
-
 
 	// Update is called once per frame
 	void Update () {
@@ -27,6 +25,5 @@ public class CreatePosChargeOnClick : MonoBehaviour {
 			Vector3 position = new Vector3 (mousePosition [0], mousePosition [1], 0);
 			Instantiate (negCharge, position, Quaternion.identity);
 		}
-
 	}
 }
