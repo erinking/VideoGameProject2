@@ -4,13 +4,13 @@ using System.Collections;
 public class CreateChargeOnClick : MonoBehaviour {
 
 
-	public GameObject posCharge;
-	public GameObject negCharge;
+	public Object posCharge;
+	public Object negCharge;
 
 	// Use this for initialization
 	void Start () {
-		posCharge = GameObject.Find ("PositiveCharge");
-		negCharge = GameObject.Find ("NegativeCharge");
+		posCharge = Resources.Load ("PositiveCharge");
+		negCharge = Resources.Load ("NegativeCharge");
 	}
 
 	// Update is called once per frame
