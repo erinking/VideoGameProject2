@@ -9,7 +9,8 @@ public class CreatePosChargeOnClick : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		posCharge = GameObject.Find ("PositiveCharge");
+		negCharge = GameObject.Find ("NegativeCharge");
 	}
 
 

@@ -5,12 +5,12 @@ using System.Collections.Generic;
 public abstract class Level : MonoBehaviour {
 
 #region Fields
-	private Dictionary<GameObject, int> chargeResources;
-	private bool isComplete;
+	public Dictionary<GameObject, int> chargeResources;
+	public bool isComplete;
 #endregion
 
 #region Methods
-	private abstract Dictionary<GameObject, int> getLevelChargeResources();
+	public abstract Dictionary<GameObject, int> getLevelChargeResources();
 
 	public virtual bool levelCompleteCheck() {
 		return isComplete;
@@ -18,7 +18,7 @@ public abstract class Level : MonoBehaviour {
 #endregion
 
 #region Unity Callbacks
-	virtual void Start () {
+	void Start () {
 		chargeResources = new Dictionary<GameObject, int> ();
 		isComplete = false;
 	}
