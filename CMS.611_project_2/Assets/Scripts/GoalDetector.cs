@@ -3,14 +3,15 @@ using System.Collections;
 
 public class GoalDetector : MonoBehaviour {
 
-	bool isComplete;
+//	bool isComplete;
 
 	void Start () {
-		this.isComplete = false;
+//		isComplete = false;
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
-		Debug.Log ("Goal was hit");
+//		isComplete = true;
+		Debug.Log ("Goal entered");
 	}
 
 }
