@@ -3,19 +3,35 @@ using System.Collections;
 
 public class SceneManager : MonoBehaviour {
 
-	public Object currentLevel;
-	public Object mouseInterface;
+	public Level currentLevel;
+	public GameObject mouseInterface;
+	public CreateChargeOnClick mouseScript;
 
 	// Use this for initialization
 	void Start () {
-		currentLevel = Resources.Load ("DemoLevel");
-		mouseInterface = Resources.Load ("MouseInterface");
-		GameObject.Instantiate (currentLevel);
+		currentLevel = Resources.Load<Level> ("DemoLevel");
+		mouseInterface = Resources.Load<GameObject> ("MouseInterface");
+		Level.Instantiate (currentLevel);
 		GameObject.Instantiate (mouseInterface);
+		mouseScript = mouseInterface.GetComponent<CreateChargeOnClick> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if (Input.GetMouseButtonDown (0)) {
+			if (currentLevel.consumeCharge (mouseScript.posCharge)) {
+				Vector2 mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+				Vector3 position = new Vector3 (mousePosition [0], mousePosition [1], 0);
+				print ("making shit");
+				Instantiate (mouseScript.posCharge, position, Quaternion.identity);
+			}
+		}
+		if (Input.GetMouseButtonDown (1)) {
+			if (currentLevel.consumeCharge (mouseScript.negCharge)) {
+				Vector2 mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+				Vector3 position = new Vector3 (mousePosition [0], mousePosition [1], 0);
+				Instantiate (mouseInterface.GetComponent<CreateChargeOnClick> ().negCharge, position, Quaternion.identity);
+			}
+		}
 	}
 }
