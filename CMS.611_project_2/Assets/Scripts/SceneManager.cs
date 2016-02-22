@@ -22,7 +22,6 @@ public class SceneManager : MonoBehaviour {
 			if (currentLevel.consumeCharge (mouseScript.posCharge)) {
 				Vector2 mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 				Vector3 position = new Vector3 (mousePosition [0], mousePosition [1], 0);
-				print ("making shit");
 				Instantiate (mouseScript.posCharge, position, Quaternion.identity);
 			}
 		}
