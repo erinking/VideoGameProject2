@@ -18,7 +18,6 @@ public abstract class Level : MonoBehaviour {
 	}
 
 	public bool tryConsumeCharge(GameObject prefab) {
-		//print (chargeResources.Keys.Count);
 		if (this.chargeResources.ContainsKey (prefab)) {
 			if (this.chargeResources [prefab] > 0) {
 				this.chargeResources[prefab] = this.chargeResources [prefab] - 1;
