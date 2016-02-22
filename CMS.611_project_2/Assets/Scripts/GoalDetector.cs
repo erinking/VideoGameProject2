@@ -11,8 +11,9 @@ public class GoalDetector : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D coll){
 	//		isComplete = true;
-		Debug.Log ("Goal entered");
-		this.gameObject.GetComponentInParent<SpriteRenderer> ().color = UnityEngine.Color.green;
+		Color goalReachedColor = new Color ();
+		ColorUtility.TryParseHtmlString ("#619F27C7", out goalReachedColor);
+		this.gameObject.GetComponentInParent<SpriteRenderer> ().color = goalReachedColor;
 	}
 
 }
