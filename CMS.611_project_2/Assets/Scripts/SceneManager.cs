@@ -11,6 +11,7 @@ public class SceneManager : MonoBehaviour {
 	void Start () {
 		currentLevel = Resources.Load<Level> ("DemoLevel");
 		mouseInterface = Resources.Load<GameObject> ("MouseInterface");
+
 		Level.Instantiate (currentLevel);
 		GameObject.Instantiate (mouseInterface);
 		mouseScript = mouseInterface.GetComponent<CreateChargeOnClick> ();
@@ -22,7 +23,22 @@ public class SceneManager : MonoBehaviour {
 			if (currentLevel.consumeCharge (mouseScript.posCharge)) {
 				Vector2 mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 				Vector3 position = new Vector3 (mousePosition [0], mousePosition [1], 0);
-				Instantiate (mouseScript.posCharge, position, Quaternion.identity);
+				GameObject thingy = (GameObject) Instantiate (mouseScript.posCharge, position, Quaternion.identity);
+				CircleCollider2D[] listOfThingies = thingy.GetComponents<CircleCollider2D> ();
+				CircleCollider2D theRightThingy;
+				if (listOfThingies [0].radius < listOfThingies [1].radius) {
+					theRightThingy = listOfThingies [0];
+				} else {
+					theRightThingy = listOfThingies [1];
+				}
+				GameObject[] boxOfNotCreations = GameObject.FindGameObjectsWithTag ("nope");
+				foreach (GameObject box in boxOfNotCreations)  {
+					if (theRightThingy.bounds.Intersects(box.GetComponent<BoxCollider2D>().bounds)) {
+						GameObject.Destroy (thingy);
+						currentLevel.unconsumeCharge (mouseScript.posCharge);
+						break;
+					}
+				}
 			}
 		}
 		if (Input.GetMouseButtonDown (1)) {

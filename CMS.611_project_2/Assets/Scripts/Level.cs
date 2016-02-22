@@ -38,6 +38,12 @@ public abstract class Level : MonoBehaviour {
 		}
 		return true;
 	}
+
+	public void unconsumeCharge(GameObject prefab) {
+		chargeResources [prefab] -= 1;
+	}
+
+	public abstract void makeWallsAndGoalAndQuaffle ();
 #endregion
 
 #region Unity Callbacks

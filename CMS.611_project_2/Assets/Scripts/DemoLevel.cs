@@ -11,6 +11,9 @@ public class DemoLevel : Level {
 		resources.Add (positiveCharge, 15);
 		resources.Add (negativeCharge, 15);
 		return resources;
+	}
+
+	override public void makeWallsAndGoalAndQuaffle() {
 
 	}
 }
