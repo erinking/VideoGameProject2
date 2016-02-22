@@ -9,9 +9,10 @@ public class GoalDetector : MonoBehaviour {
 //		isComplete = false;
 	}
 
-	void OnTriggerEnter2D(Collider2D other){
-//		isComplete = true;
+	void OnTriggerEnter2D(Collider2D coll){
+	//		isComplete = true;
 		Debug.Log ("Goal entered");
+		this.gameObject.GetComponentInParent<SpriteRenderer> ().color = UnityEngine.Color.green;
 	}
 
 }
