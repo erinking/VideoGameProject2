@@ -17,8 +17,10 @@ public class SceneManager : MonoBehaviour {
 		GameObject.Instantiate (mouseInterface);
 		mouseScript = mouseInterface.GetComponent<CreateChargeOnClick> ();
 
-		posCount.text = currentLevel.getNumCharges (mouseScript.posCharge);
-		negCount.text = currentLevel.getNumCharges (mouseScript.negCharge);
+		if (posCount != null)
+			posCount.text = currentLevel.getNumCharges (mouseScript.posCharge);
+		if (negCount != null)
+			negCount.text = currentLevel.getNumCharges (mouseScript.negCharge);
 	}
 	
 	// Update is called once per frame
@@ -44,7 +46,8 @@ public class SceneManager : MonoBehaviour {
 						break;
 					}
 				}
-				posCount.text = currentLevel.getNumCharges (mouseScript.posCharge);
+				if (posCount != null)
+					posCount.text = currentLevel.getNumCharges (mouseScript.posCharge);
 			}
 		}
 		if (Input.GetMouseButtonDown (1)) {
@@ -67,8 +70,8 @@ public class SceneManager : MonoBehaviour {
 						break;
 					}
 				}
-				negCount.text = currentLevel.getNumCharges (mouseScript.negCharge);
-
+				if (negCount != null)
+					negCount.text = currentLevel.getNumCharges (mouseScript.negCharge);
 			}
 		}
 	}
