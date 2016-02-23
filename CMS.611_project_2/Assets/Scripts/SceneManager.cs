@@ -51,8 +51,24 @@ public class SceneManager : MonoBehaviour {
 			if (currentLevel.consumeCharge (mouseScript.negCharge)) {
 				Vector2 mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 				Vector3 position = new Vector3 (mousePosition [0], mousePosition [1], 0);
-				Instantiate (mouseScript.negCharge, position, Quaternion.identity);
+				GameObject thingy = (GameObject) Instantiate (mouseScript.negCharge, position, Quaternion.identity);
+				CircleCollider2D[] listOfThingies = thingy.GetComponents<CircleCollider2D> ();
+				CircleCollider2D theRightThingy;
+				if (listOfThingies [0].radius < listOfThingies [1].radius) {
+					theRightThingy = listOfThingies [0];
+				} else {
+					theRightThingy = listOfThingies [1];
+				}
+				GameObject[] boxOfNotCreations = GameObject.FindGameObjectsWithTag ("nope");
+				foreach (GameObject box in boxOfNotCreations)  {
+					if (theRightThingy.bounds.Intersects(box.GetComponent<BoxCollider2D>().bounds)) {
+						GameObject.Destroy (thingy);
+						currentLevel.unconsumeCharge (mouseScript.negCharge);
+						break;
+					}
+				}
 				negCount.text = currentLevel.getNumCharges (mouseScript.negCharge);
+
 			}
 		}
 	}
