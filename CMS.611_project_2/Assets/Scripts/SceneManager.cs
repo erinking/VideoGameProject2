@@ -39,7 +39,7 @@ public class SceneManager : MonoBehaviour {
 				GameObject[] blockedRegions = GameObject.FindGameObjectsWithTag ("nope");
 				foreach (GameObject box in blockedRegions)  {
 					if (innerCollider.bounds.Intersects(box.GetComponent<BoxCollider2D>().bounds)) {
-						Debug.Log ("hello?");
+						Debug.Log ("can't place a particle there!");
 						GameObject.Destroy (newCharge);
 						currentLevel.unconsumeCharge (mouseScript.posCharge);
 						break;
