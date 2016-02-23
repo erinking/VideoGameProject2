@@ -28,18 +28,19 @@ public class SceneManager : MonoBehaviour {
 			if (currentLevel.consumeCharge (mouseScript.posCharge)) {
 				Vector2 mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 				Vector3 position = new Vector3 (mousePosition [0], mousePosition [1], 0);
-				GameObject thingy = (GameObject) Instantiate (mouseScript.posCharge, position, Quaternion.identity);
-				CircleCollider2D[] listOfThingies = thingy.GetComponents<CircleCollider2D> ();
-				CircleCollider2D theRightThingy;
-				if (listOfThingies [0].radius < listOfThingies [1].radius) {
-					theRightThingy = listOfThingies [0];
+				GameObject newCharge = (GameObject) Instantiate (mouseScript.posCharge, position, Quaternion.identity);
+				CircleCollider2D[] chargeColliders = newCharge.GetComponents<CircleCollider2D> ();
+				CircleCollider2D innerCollider;
+				if (chargeColliders [0].radius < chargeColliders [1].radius) {
+					innerCollider = chargeColliders [0];
 				} else {
-					theRightThingy = listOfThingies [1];
+					innerCollider = chargeColliders [1];
 				}
-				GameObject[] boxOfNotCreations = GameObject.FindGameObjectsWithTag ("nope");
-				foreach (GameObject box in boxOfNotCreations)  {
-					if (theRightThingy.bounds.Intersects(box.GetComponent<BoxCollider2D>().bounds)) {
-						GameObject.Destroy (thingy);
+				GameObject[] blockedRegions = GameObject.FindGameObjectsWithTag ("nope");
+				foreach (GameObject box in blockedRegions)  {
+					if (innerCollider.bounds.Intersects(box.GetComponent<BoxCollider2D>().bounds)) {
+						Debug.Log ("hello?");
+						GameObject.Destroy (newCharge);
 						currentLevel.unconsumeCharge (mouseScript.posCharge);
 						break;
 					}
@@ -51,18 +52,18 @@ public class SceneManager : MonoBehaviour {
 			if (currentLevel.consumeCharge (mouseScript.negCharge)) {
 				Vector2 mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 				Vector3 position = new Vector3 (mousePosition [0], mousePosition [1], 0);
-				GameObject thingy = (GameObject) Instantiate (mouseScript.negCharge, position, Quaternion.identity);
-				CircleCollider2D[] listOfThingies = thingy.GetComponents<CircleCollider2D> ();
-				CircleCollider2D theRightThingy;
-				if (listOfThingies [0].radius < listOfThingies [1].radius) {
-					theRightThingy = listOfThingies [0];
+				GameObject newCharge = (GameObject) Instantiate (mouseScript.negCharge, position, Quaternion.identity);
+				CircleCollider2D[] chargeColliders = newCharge.GetComponents<CircleCollider2D> ();
+				CircleCollider2D innerCollider;
+				if (chargeColliders [0].radius < chargeColliders [1].radius) {
+					innerCollider = chargeColliders [0];
 				} else {
-					theRightThingy = listOfThingies [1];
+					innerCollider = chargeColliders [1];
 				}
-				GameObject[] boxOfNotCreations = GameObject.FindGameObjectsWithTag ("nope");
-				foreach (GameObject box in boxOfNotCreations)  {
-					if (theRightThingy.bounds.Intersects(box.GetComponent<BoxCollider2D>().bounds)) {
-						GameObject.Destroy (thingy);
+				GameObject[] blockedRegions = GameObject.FindGameObjectsWithTag ("nope");
+				foreach (GameObject box in blockedRegions)  {
+					if (innerCollider.bounds.Intersects(box.GetComponent<BoxCollider2D>().bounds)) {
+						GameObject.Destroy (newCharge);
 						currentLevel.unconsumeCharge (mouseScript.negCharge);
 						break;
 					}
