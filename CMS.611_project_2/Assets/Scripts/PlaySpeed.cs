@@ -9,13 +9,17 @@ public class PlaySpeed : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Time.timeScale = 0.0F; // start the game on pause.
-		pauseButton.interactable = false;
-		playButton.interactable = true;
-		fastButton.interactable = true;
-		pauseButton.onClick.AddListener(() => handleButton(pauseButton, playButton, fastButton, 0));
-		playButton.onClick.AddListener(() => handleButton(pauseButton, playButton, fastButton, 1));
-		fastButton.onClick.AddListener(() => handleButton(pauseButton, playButton, fastButton, 2));
+		if (playButton == null)
+			Time.timeScale = 2.0F; // start at normal speed.
+		else {
+			Time.timeScale = 0.0F; // start the game on pause.
+			pauseButton.interactable = false;
+			playButton.interactable = true;
+			fastButton.interactable = true;
+			pauseButton.onClick.AddListener (() => handleButton (pauseButton, playButton, fastButton, 0));
+			playButton.onClick.AddListener (() => handleButton (pauseButton, playButton, fastButton, 1));
+			fastButton.onClick.AddListener (() => handleButton (pauseButton, playButton, fastButton, 2));
+		}
 	}
 
 	// newSpeed: 0 = pause, 1 = play, 2 = fast.
