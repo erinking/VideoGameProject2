@@ -34,7 +34,7 @@ public class PlaySpeed : MonoBehaviour {
 				fast.interactable = true;
 				break;
 			case 2:
-				Time.timeScale = 4.0F;
+				Time.timeScale = 8.0F;
 				pause.interactable = true;
 				play.interactable = true;
 				fast.interactable = false;
