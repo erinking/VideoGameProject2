@@ -11,7 +11,6 @@ public class SceneManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		currentLevel = Resources.Load<Level> ("DemoLevel");
 		mouseInterface = Resources.Load<GameObject> ("MouseInterface");
 
 		Level.Instantiate (currentLevel);
