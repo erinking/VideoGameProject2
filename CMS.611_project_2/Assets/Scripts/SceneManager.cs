@@ -50,10 +50,10 @@ public class SceneManager : MonoBehaviour {
 		GameObject chargeToCreate = null;
 		if (chargeValue == -1) {
 			chargeToCreate = mouseScript.negCharge;
-			Debug.Log ("creating negative charge");
+			//Debug.Log ("creating negative charge");
 		} else if (chargeValue == 1) {
 			chargeToCreate = mouseScript.posCharge;
-			Debug.Log ("creating positive charge");
+			//Debug.Log ("creating positive charge");
 		} else {
 			Debug.Log ("Tried to create a charge that was not positive or negative.");
 		}
