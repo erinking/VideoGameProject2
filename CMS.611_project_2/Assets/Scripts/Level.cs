@@ -20,7 +20,7 @@ public abstract class Level : MonoBehaviour {
 	public bool tryConsumeCharge(GameObject prefab) {
 		if (this.chargeResources.ContainsKey (prefab)) {
 			if (this.chargeResources [prefab] > 0) {
-				this.chargeResources[prefab] = this.chargeResources [prefab] - 1;
+				this.chargeResources [prefab] -= 1;
 				return true;
 			}
 		}
@@ -29,7 +29,7 @@ public abstract class Level : MonoBehaviour {
 
 	public bool consumeCharge(GameObject prefab) {
 		if (this.chargeResources == null) {
-			chargeResources = getLevelChargeResources ();
+			this.chargeResources = getLevelChargeResources ();
 		}
 		bool doesItWork = tryConsumeCharge (prefab);
 		if (!doesItWork) {
@@ -39,7 +39,14 @@ public abstract class Level : MonoBehaviour {
 	}
 
 	public void unconsumeCharge(GameObject prefab) {
-		chargeResources [prefab] -= 1;
+		this.chargeResources [prefab] += 1;
+	}
+
+	public string getNumCharges(GameObject prefab) {
+		if (this.chargeResources == null) {
+			this.chargeResources = getLevelChargeResources ();
+		}
+		return this.chargeResources [prefab].ToString();
 	}
 
 	public abstract void makeWallsAndGoalAndQuaffle ();

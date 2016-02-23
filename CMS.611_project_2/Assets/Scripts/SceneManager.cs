@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class SceneManager : MonoBehaviour {
 
 	public Level currentLevel;
 	public GameObject mouseInterface;
+	public Text posCount, negCount;
 	public CreateChargeOnClick mouseScript;
 
 	// Use this for initialization
@@ -15,6 +17,9 @@ public class SceneManager : MonoBehaviour {
 		Level.Instantiate (currentLevel);
 		GameObject.Instantiate (mouseInterface);
 		mouseScript = mouseInterface.GetComponent<CreateChargeOnClick> ();
+
+		posCount.text = currentLevel.getNumCharges (mouseScript.posCharge);
+		negCount.text = currentLevel.getNumCharges (mouseScript.negCharge);
 	}
 	
 	// Update is called once per frame
@@ -39,13 +44,15 @@ public class SceneManager : MonoBehaviour {
 						break;
 					}
 				}
+				posCount.text = currentLevel.getNumCharges (mouseScript.posCharge);
 			}
 		}
 		if (Input.GetMouseButtonDown (1)) {
 			if (currentLevel.consumeCharge (mouseScript.negCharge)) {
 				Vector2 mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 				Vector3 position = new Vector3 (mousePosition [0], mousePosition [1], 0);
-				Instantiate (mouseInterface.GetComponent<CreateChargeOnClick> ().negCharge, position, Quaternion.identity);
+				Instantiate (mouseScript.negCharge, position, Quaternion.identity);
+				negCount.text = currentLevel.getNumCharges (mouseScript.negCharge);
 			}
 		}
 	}
