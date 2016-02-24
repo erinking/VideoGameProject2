@@ -28,7 +28,10 @@ public class SceneManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		Vector2 mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-		Vector2 mouseVelocity = (mousePosition - previousMousePosition) / Time.deltaTime;
+		Vector2 mouseVelocity = (mousePosition - previousMousePosition) / Time.fixedDeltaTime;
+		// Debug.Log (mousePosition.ToString() + ", " + previousMousePosition.ToString()  + ", " +  mouseVelocity.ToString() );
+		//Debug.Log ("mouse velocity is" + mouseVelocity);
+
 		if (Input.GetMouseButtonUp (0)) {
 			createCharge (1, mousePosition, mouseVelocity);
 		}
@@ -47,19 +50,22 @@ public class SceneManager : MonoBehaviour {
 		 * @param velocity: the charge's initial velocity.
 		 */
 
+		// Forces applied to new particles from mouse movement are multiplied by this constant.
+		float forceConstant = 0.6F;
+
+
 		GameObject chargeToCreate = null;
 		if (chargeValue == -1) {
 			chargeToCreate = mouseScript.negCharge;
-			//Debug.Log ("creating negative charge");
 		} else if (chargeValue == 1) {
 			chargeToCreate = mouseScript.posCharge;
-			//Debug.Log ("creating positive charge");
 		} else {
-			Debug.Log ("Tried to create a charge that was not positive or negative.");
+			Debug.LogError ("Tried to create a charge that was not positive or negative.");
+			return;
 		}
 			
 		if (currentLevel.consumeCharge (chargeToCreate)) {
-			Vector3 position3 = new Vector3 (position [0], position [1], 0);
+//			Vector3 position3 = new Vector3 (position [0], position [1], 0);
 			GameObject newCharge = (GameObject) Instantiate (chargeToCreate, position, Quaternion.identity);
 			CircleCollider2D[] chargeColliders = newCharge.GetComponents<CircleCollider2D> ();
 			CircleCollider2D innerCollider;
@@ -78,7 +84,21 @@ public class SceneManager : MonoBehaviour {
 				}
 			}
 
-			newCharge.GetComponent<Rigidbody2D> ().velocity = velocity;
+			// Check if it would hit anything a charge isn't allowed to go through.
+			// This could happen if the user moved their mouse quicly enough.
+//			RaycastHit2D whatItWillHit = Physics2D.Raycast (position, velocity.normalized, 
+//				5 * Time.fixedDeltaTime * forceConstant * velocity.magnitude);
+//			Debug.Log ("Casting ray whose distance is " + 5 * Time.fixedDeltaTime * forceConstant * velocity.magnitude);
+//			if (whatItWillHit.collider != null && whatItWillHit.transform.tag == "nope") { // if it would hit something
+//				Debug.Log ("would hit something at distance " + whatItWillHit.distance);
+//				newCharge.GetComponent<Rigidbody2D> ().AddForce (whatItWillHit.distance * velocity.normalized, ForceMode2D.Impulse);
+//			} else {
+//				Debug.Log("wouldn't hit anything");
+				newCharge.GetComponent<Rigidbody2D> ().AddForce (forceConstant * velocity, ForceMode2D.Impulse);
+//			}
+				
+				
+
 
 			if (chargeValue == 1 && posCount != null) {
 				posCount.text = currentLevel.getNumCharges (mouseScript.posCharge);
