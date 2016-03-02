@@ -41,11 +41,11 @@ Some semblance of a puzzle.
 https://dl.dropboxusercontent.com/u/13390253/feb22eod-web/index.html
 
 ### Feb. 23 almost finished
-Now with a title, menu, and credits!
+Now with a title, menu, and credits! Bug with initial velocities...
 
 https://dl.dropboxusercontent.com/u/13390253/splashMenuDemo-web/index.html
 
 ### Feb. 24 final prototype
-[description]
+With tutorial and working initial velocity.
 
-[link goes here]
+https://dl.dropboxusercontent.com/u/13390253/final-web/index.html
